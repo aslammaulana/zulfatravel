@@ -39,7 +39,7 @@ export default function NavbarDekstop() {
                     <Link
                         href={contactUrl}
                         target="_blank"
-                        className="flex items-center gap-2 rounded-full bg-[#418064] px-6 py-3 text-white font-semibold text-[14px] hover:bg-[#2b5844] transition-colors"
+                        className="flex items-center gap-2 rounded-full  px-6 py-3 text-white font-semibold text-[14px] bg-[#418064] hover:bg-[#2b5844] transition-colors"
                     >
                         
                         <FaHeadset />

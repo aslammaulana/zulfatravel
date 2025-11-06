@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Teko } from "next/font/google";
+import { Inter, Noto_Sans, Teko } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const inter = Noto_Sans({
+  variable: "--font-noto",
   subsets: ["latin"],
   display: "swap",
 });

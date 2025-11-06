@@ -20,11 +20,11 @@ const Hero = () => {
         >
             <div className="absolute inset-0 bg-black/30"></div>
 
-            <div className="relative w-[100%] md:w-[90%] p-2 md:p-0 mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 py-10 md:py-20 ">
+            <div className="relative w-[100%] md:w-[87%] p-2 md:p-0 mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 py-10 md:py-20 ">
 
                 {/* Kolom kiri */}
                 <div className="flex flex-col gap-6 text-center md:text-left basis-1/2">
-                    <h1 className="text-[30px] md:text-[45px] font-bold leading-tight mb-[-10px]">
+                    <h1 className="text-[30px] md:text-[55px] font-bold font-teko leading-tight mb-[-30px]">
                         NAWAYA HAROMAIN
                     </h1>
                     <p className="leading-relaxed text-gray-200">
