@@ -54,7 +54,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
 
                 <div className="">
                     <p className="text-red-600 font-bold text-sm mb-3">
-                        IDR {price.toLocaleString("id-ID")}/Person
+                        Rp {price.toLocaleString("id-ID")},-
                     </p>
 
                     <div className="space-y-1 text-sm text-gray-600 mb-3">
