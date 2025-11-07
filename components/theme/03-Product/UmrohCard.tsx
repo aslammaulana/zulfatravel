@@ -27,7 +27,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
     link,
 }) => {
     return (
-        <div className="flex flex-col border-2 pt-1 px-1 border-[#c9c9c994] rounded-[8px] shadow-sm overflow-hidden bg-white w-[260px] h-full ">
+        <div className="flex flex-col border-2 pt-1 px-1 border-[#c9c9c994] rounded-[8px] shadow-sm overflow-hidden bg-white w-full h-full ">
             <div className="relative w-full h-[170px]  ">
                 {/* Gambar */}
                 <div className="m-2">
