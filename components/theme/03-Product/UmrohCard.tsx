@@ -41,9 +41,8 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
             alt={title}
             fill
             priority
-            className={`object-cover rounded-[10px] transition-opacity duration-500 ${
-              isImageLoaded ? "opacity-100" : "opacity-0"
-            }`}
+            className={`object-cover rounded-[10px] transition-opacity duration-500 ${isImageLoaded ? "opacity-100" : "opacity-0"
+              }`}
             onLoad={() => setIsImageLoaded(true)}
           />
         </div>
@@ -76,11 +75,12 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
 
           {/* Tombol */}
           <a
-            href={link}
+            href={link.replace("/umroh/", "/umroh/")}
             className="block text-center font-semibold bg-[#418064] hover:bg-[#2b5844] text-white py-2 rounded-full text-sm transition-colors -mx-1"
           >
             Lihat Detail
           </a>
+
         </div>
       </div>
     </div>

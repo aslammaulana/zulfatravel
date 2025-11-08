@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { umrohList } from "./data";
+import { createClient } from "@supabase/supabase-js";
 import UmrohCard from "./UmrohCard";
 import {
   Carousel,
@@ -11,23 +11,83 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+// Inisialisasi Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+type UmrohPackage = {
+  id: number;
+  title: string;
+  price: number;
+  date: string;
+  duration: string;
+  airline: string;
+  imageSrc: string;
+  link: string;
+};
+
 const PaketUmroh = () => {
+  const [data, setData] = useState<UmrohPackage[]>([]);
+  const [loading, setLoading] = useState(true);
   const [current, setCurrent] = useState(0);
   const [api, setApi] = useState<any>(null);
 
-  // Saat carousel aktif, simpan instance API
+  // Ambil data dari Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("paket_umroh")
+        .select("*")
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error("Gagal mengambil data:", error);
+      } else if (data) {
+        const formatted = data.map((item) => ({
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          date: item.date,
+          duration: item.duration,
+          airline: item.airline,
+          imageSrc: item.imagesrc,
+          link: item.link,
+        }));
+        setData(formatted);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  // Carousel tracking
   useEffect(() => {
     if (!api) return;
 
     setCurrent(api.selectedScrollSnap());
 
-    const onSelect = () => {
-      setCurrent(api.selectedScrollSnap());
-    };
-
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
     api.on("select", onSelect);
+
     return () => api.off("select", onSelect);
   }, [api]);
+
+  if (loading)
+    return (
+      <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[70px] text-center">
+        <p>Memuat data paket umroh...</p>
+      </main>
+    );
+
+  if (!data.length)
+    return (
+      <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[70px] text-center">
+        <p>Tidak ada paket umroh tersedia.</p>
+      </main>
+    );
 
   return (
     <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[70px]" id="paket">
@@ -50,9 +110,9 @@ const PaketUmroh = () => {
             className="w-full"
           >
             <CarouselContent>
-              {umrohList.map((item, i) => (
+              {data.map((item, i) => (
                 <CarouselItem
-                  key={i}
+                  key={item.id || i}
                   className="basis-full md:basis-1/2 lg:basis-1/4 flex justify-center items-center"
                 >
                   <UmrohCard {...item} />
@@ -66,7 +126,7 @@ const PaketUmroh = () => {
 
           {/* Pagination dots */}
           <div className="flex justify-center items-center gap-2 mt-6">
-            {umrohList.map((_, index) => (
+            {data.map((_, index) => (
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
