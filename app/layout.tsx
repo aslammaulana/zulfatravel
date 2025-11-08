@@ -17,8 +17,8 @@ const teko = Teko({
 });
 
 export const metadata: Metadata = {
-  title: "Aslam Travel",
-  description: "Website resmi Aslam Travel Umrah dan Haji",
+  title: "Nawaya Haromain",
+  description: "Website resmi Nawaya Haromain Umrah dan Haji",
 };
 
 export default function RootLayout({
