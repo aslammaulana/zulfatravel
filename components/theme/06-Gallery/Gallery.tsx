@@ -8,7 +8,7 @@ const Gallery = () => {
     const contactUrl = "https://wa.me/6281234567890";
 
     return (
-        <main className="w-full bg-[#f6f8fd] pt-[20px] pb-[50px]">
+        <main className="w-full bg-[#f6f8fd] pt-[20px] pb-[50px] " id='galeri'>
             <div className="w-full md:w-[87%] p-2 md:p-0 m-auto bg-[#f6f8fd] relative">
                 {/* Title */}
                 <div className="mb-5">

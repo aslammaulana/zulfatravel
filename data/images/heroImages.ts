@@ -1,4 +1,4 @@
-import heroBackground from "@/public/NawayaAssets/Latar-01.png";
+import heroBackground from "@/public/NawayaAssets/LatarHero.jpg";
 
 export {
     heroBackground

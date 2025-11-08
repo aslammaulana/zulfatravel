@@ -12,7 +12,8 @@ import {
 
 const PaketUmroh = () => {
   return (
-    <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[50px]">
+    <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[50px]"
+    id="paket">
       <div className="w-full md:w-[87%] p-2 md:p-0 m-auto bg-[#f6f8fd] relative">
         <p className="text-[16px] font-medium my-[-10px] text-center">
           Rencanakan Umroh Anda Segera!

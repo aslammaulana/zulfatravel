@@ -27,7 +27,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
     link,
 }) => {
     return (
-        <div className="flex flex-col border-2 pt-1 px-1 border-[#c9c9c994] rounded-[8px] shadow-sm overflow-hidden bg-white w-full h-full ">
+        <div className="flex flex-col border-2 pt-1 px-1 border-[#e3e3e3] rounded-[15px]  overflow-hidden bg-white w-full h-full ">
             <div className="relative w-full h-[170px]  ">
                 {/* Gambar */}
                 <div className="m-2">
@@ -35,7 +35,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
                         src={imageSrc}
                         alt={title}
                         fill
-                        className="object-cover rounded-tr-[5px] rounded-tl-[5px]"
+                        className="object-cover rounded-tr-[10px] rounded-tl-[10px]"
                         priority
                     />
                 </div>
@@ -45,19 +45,22 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
             <div className="flex flex-col justify-between grow p-4">
                 {/* Bagian atas: teks dan info */}
                 <div>
-                    <h3 className="font-medium tracking-[0em] mb-2 leading-normal">
+                    <p className="font-semibold mb-1 leading-normal">
                         {title}
-                    </h3>
+                    </p>
 
 
                 </div>
 
                 <div className="">
-                    <p className="text-red-600 font-bold text-sm mb-3">
+                    <p className="text-[#c72a2a] font-bold ">
                         Rp {price.toLocaleString("id-ID")},-
                     </p>
 
-                    <div className="space-y-1 text-sm text-gray-600 mb-3">
+                    <div className="border-t-2 border-[#d1d1d1] border-dashed my-5">
+
+                    </div>
+                    <div className="space-y-2 text-sm text-[#6e6e6e] mb-5">
                         <div className="flex items-center gap-2">
                             <FaCalendarCheck size={14} /> <span>{date}</span>
                         </div>
@@ -71,7 +74,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
                     {/* Tombol di bawah */}
                     <a
                         href={link}
-                        className="block text-center font-semibold  bg-[#418064] hover:bg-[#2b5844]  text-white py-2 rounded-[5px] text-sm font-medium transition"
+                        className="block text-center font-semibold  bg-[#418064] hover:bg-[#2b5844]  text-white py-2 rounded-full text-sm font-medium transition -mx-1"
                     >
                         Lihat Detail
                     </a>

@@ -50,7 +50,7 @@
 
 /* Global styleh */
 body {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-noto), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

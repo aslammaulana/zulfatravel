@@ -21,6 +21,7 @@ const staggerContainer = {
 
 const Profile = () => {
   const logoSrc = "/NawayaAssets/AcehNawaya.png";
+  const nawayaMobile = "/NawayaAssets/AcehNawayaMobile.png";
   const listProduk1 = "/NawayaAssets/listproduk1.png";
   const listProduk2 = "/NawayaAssets/listproduk2.png";
   const listProduk3 = "/NawayaAssets/listproduk3.png";
@@ -29,7 +30,7 @@ const Profile = () => {
   return (
     <motion.section
       id="our-service"
-      className="relative w-full md:w-[87%] p-2 md:p-0 mx-auto flex flex-col md:flex-row items-start justify-between gap-10 py-10 md:py-20"
+      className="relative w-full md:w-[87%] p-3 md:p-0 mx-auto flex flex-col md:flex-row items-start justify-between gap-10 py-10 md:py-20"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -42,7 +43,7 @@ const Profile = () => {
       >
         <div className="relative flex justify-center items-center w-full">
           <Image
-            src={logoSrc}
+            src={nawayaMobile}
             alt="Logo Nawaya Haromain"
             width={600}
             height={600}
