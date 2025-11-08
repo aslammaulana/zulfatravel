@@ -1,13 +1,36 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import ChooseCard from "./Choose";
+import { motion } from "framer-motion";
+import { easeOut } from "framer-motion"; // tambahkan ini
 
+// Variants untuk animasi
+const staggerContainer = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            staggerChildren: 0.2,
+            duration: 0.6,
+            ease: easeOut, // gunakan fungsi, bukan string
+        },
+    },
+};
 
 const ChooseUs = () => {
     const woman = "/NawayaAssets/woman.png";
 
     return (
-        <main className="w-full bg-[#f6f8fd] pt-[70px] pb-[50px]">
+
+        <motion.section
+            className="w-full bg-[#f6f8fd] pt-[70px] pb-[50px]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+        >
             <div className="w-full md:w-[87%] p-2 md:p-0 m-auto bg-[#f6f8fd] relative">
                 {/* Title */}
                 <div className="mb-5">
@@ -40,7 +63,7 @@ const ChooseUs = () => {
 
                 </div>
             </div>
-        </main>
+        </motion.section>
     );
 };
 
