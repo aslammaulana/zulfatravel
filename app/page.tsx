@@ -11,9 +11,10 @@ import Footer from '@/components/theme/Footer/Footer'
 import Link from 'next/link'
 import { FaHeadset } from 'react-icons/fa6'
 import HeroTest from '@/components/theme/02-HeroSection/HeroTest'
+import { FaWhatsapp } from 'react-icons/fa'
 
 const page = () => {
-  const contactUrl = "https://wa.me/6281234567890";
+  const contactUrl = "https://wa.me/6282298304077";
 
   return (
     <>
@@ -34,7 +35,7 @@ const page = () => {
         target="_blank"
         className="fixed bottom-6 right-6 z-50 flex items-center rounded-full p-4 text-[#ffffff] font-semibold  bg-[#418064] hover:bg-[#2b5844] transition-colors shadow-lg"
       >
-        <FaHeadset className="text-[22px]" />
+        <FaWhatsapp className="text-[22px]" />
       </Link>
       
     </>

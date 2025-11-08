@@ -9,7 +9,7 @@ import { FaHeadset } from 'react-icons/fa';
 export default function NavbarDekstop() {
   const logoSrc = "/NawayaAssets/LogoNawaya.svg";
   const title = "Aslam Travel";
-  const contactUrl = "https://wa.me/6281234567890";
+  const contactUrl = "https://wa.me/6282298304077";
 
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
