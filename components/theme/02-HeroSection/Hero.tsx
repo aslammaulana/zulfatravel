@@ -1,25 +1,35 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaHeadset } from "react-icons/fa";
-import { heroBackground } from "@/data/images/heroImages"; 
+import { heroBackground } from "@/data/images/heroImages";
 
 const Hero = () => {
   const contactUrl = "https://wa.me/6281234567890";
   const logoSrc = "/NawayaAssets/Ibad-Image.webp";
 
+  const [bgLoaded, setBgLoaded] = useState(false);
+
   return (
     <section className="relative w-full px-5 py-[22px] text-white overflow-hidden">
-      {/* Background Image */}
+      {/* Background Wrapper */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Skeleton Loading */}
+        {!bgLoaded && (
+          <div className="absolute inset-0 bg-[#57876d] animate-pulse" />
+        )}
+
+        {/* Background Image */}
         <Image
           src={heroBackground}
           alt="Hero Background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          className={`object-cover mix-blend-lighten transition-opacity duration-700 ${
+            bgLoaded ? "opacity-100" : "opacity-100"
+          }`}
           priority
-          className=" mix-blend-lighten"
+          onLoad={() => setBgLoaded(true)}
         />
       </div>
 

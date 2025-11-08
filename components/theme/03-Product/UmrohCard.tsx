@@ -35,7 +35,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
         )}
 
         {/* Gambar */}
-        <div className="m-2 relative w-full h-full rounded-[10px] overflow-hidden">
+        <div className=" relative w-full h-full rounded-[10px] overflow-hidden">
           <Image
             src={imageSrc}
             alt={title}
