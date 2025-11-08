@@ -10,6 +10,7 @@ import Gallery from '@/components/theme/06-Gallery/Gallery'
 import Footer from '@/components/theme/Footer/Footer'
 import Link from 'next/link'
 import { FaHeadset } from 'react-icons/fa6'
+import HeroTest from '@/components/theme/02-HeroSection/HeroTest'
 
 const page = () => {
   const contactUrl = "https://wa.me/6281234567890";
