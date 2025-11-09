@@ -7,15 +7,10 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-type PageProps = {
-  params: { slug: string };
-};
-
-export default async function UmrohDetailPage({ params }: PageProps) {
+export default async function UmrohDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
-  // Jika id di DB bertipe number, ubah slug ke number
-  const id = Number(slug);
+  const id = Number(slug); // jika id di DB number
 
   const { data, error } = await supabase
     .from("paket_umroh")
@@ -51,8 +46,7 @@ export default async function UmrohDetailPage({ params }: PageProps) {
         </div>
 
         <p className="text-gray-700 leading-relaxed">
-          Nikmati pengalaman ibadah umroh dengan pelayanan terbaik dan bimbingan
-          sesuai Al-Qur’an dan Sunnah. Hubungi kami untuk informasi lebih lanjut.
+          Nikmati pengalaman ibadah umroh dengan pelayanan terbaik dan bimbingan sesuai Al-Qur’an dan Sunnah. Hubungi kami untuk informasi lebih lanjut.
         </p>
 
         <a
