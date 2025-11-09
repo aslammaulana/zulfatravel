@@ -1,105 +1,121 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-// Inisialisasi Supabase dengan SERVICE ROLE KEY
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // pakai key yang lebih kuat
 );
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const { data, error } = await supabase
-      .from("paket_umroh")
-      .select("*")
-      .order("id", { ascending: true });
+    const { searchParams } = new URL(request.url);
+    const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 10;
+    const offset = searchParams.get('offset') ? parseInt(searchParams.get('offset')!) : 0;
 
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 400 });
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    console.error("GET /api/paket error:", err);
-    return NextResponse.json({ success: false, error: "Terjadi kesalahan server." }, { status: 500 });
-  }
-}
+    let query = supabase
+      .from('paket_umroh')
+      .select('*')
+      .range(offset, offset + limit - 1)
+      .order('created_at', { ascending: false });
 
-export async function POST(req: Request) {
-  try {
-    const body: any = await req.json();
-    const { title, price, date, duration, airline, imageSrc, link } = body;
+    const { data, error } = await query;
 
-    if (!title || !price || !date || !link) {
-      return NextResponse.json(
-        { success: false, error: "Field title, price, date, dan link wajib diisi." },
-        { status: 400 }
-      );
+    if (error) {
+      console.error('Error fetching packages:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    const { data, error } = await supabase.from("paket_umroh").insert([
-      {
-        title,
-        price: Number(price),
-        date,
-        duration,
-        airline,
-        imagesrc: imageSrc || "",
-        link,
-      },
-    ]);
-
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 400 });
-    return NextResponse.json({ success: true, data }, { status: 201 });
-  } catch (err) {
-    console.error("POST /api/paket error:", err);
-    return NextResponse.json({ success: false, error: "Terjadi kesalahan server." }, { status: 500 });
+    return NextResponse.json(data);
+  } catch (error: any) {
+    console.error('Unexpected error in GET /api/paket:', error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }
 
-// Untuk PUT dan DELETE, gunakan route dinamis: /api/paket/[id]/route.ts
-export async function PUT(req: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const url = new URL(req.url);
-    const id = url.pathname.split("/").pop();
-    if (!id) return NextResponse.json({ success: false, error: "ID tidak ditemukan" }, { status: 400 });
+    const body = await request.json();
 
-    const body: any = await req.json();
-    const { title, price, date, duration, airline, imageSrc, link } = body;
+    // Validate required fields
+    if (!body.title || !body.price || !body.duration) {
+      return NextResponse.json({ error: 'Title, price, and duration are required' }, { status: 400 });
+    }
 
     const { data, error } = await supabase
-      .from("paket_umroh")
-      .update({
-        title,
-        price: Number(price),
-        date,
-        duration,
-        airline,
-        imagesrc: imageSrc || "",
-        link,
-      })
-      .eq("id", Number(id));
+      .from('paket_umroh')
+      .insert([{
+        title: body.title,
+        price: body.price,
+        date: body.date,
+        duration: body.duration,
+        airline: body.airline || '',
+        imagesrc: body.imageSrc || body.imagesrc || '',
+        link: body.link || '',
+        created_at: new Date().toISOString(),
+      }]);
 
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 400 });
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    console.error("PUT /api/paket/[id] error:", err);
-    return NextResponse.json({ success: false, error: "Terjadi kesalahan server." }, { status: 500 });
+    if (error) {
+      console.error('Error adding package:', error);
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
+    return NextResponse.json({ success: true, data: data[0] });
+  } catch (error: any) {
+    console.error('Unexpected error in POST /api/paket:', error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }
 
-export async function DELETE(req: Request) {
+export async function PUT(request: NextRequest) {
   try {
-    const url = new URL(req.url);
-    const id = url.pathname.split("/").pop();
-    if (!id) return NextResponse.json({ success: false, error: "ID tidak ditemukan" }, { status: 400 });
+    const body = await request.json();
+    
+    if (!body.id) {
+      return NextResponse.json({ error: 'ID is required for updating' }, { status: 400 });
+    }
 
+    // Prepare update object without the ID
+    const { id, ...updateData } = body;
+    
     const { data, error } = await supabase
-      .from("paket_umroh")
+      .from('paket_umroh')
+      .update(updateData)
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error updating package:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, data: data });
+  } catch (error: any) {
+    console.error('Unexpected error in PUT /api/paket:', error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required for deletion' }, { status: 400 });
+    }
+
+    const { error } = await supabase
+      .from('paket_umroh')
       .delete()
-      .eq("id", Number(id));
+      .eq('id', id);
 
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 400 });
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    console.error("DELETE /api/paket/[id] error:", err);
-    return NextResponse.json({ success: false, error: "Terjadi kesalahan server." }, { status: 500 });
+    if (error) {
+      console.error('Error deleting package:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Package deleted successfully' });
+  } catch (error: any) {
+    console.error('Unexpected error in DELETE /api/paket:', error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }

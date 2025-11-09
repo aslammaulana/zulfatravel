@@ -6,6 +6,8 @@ import { FaCalendarCheck, FaPlaneDeparture } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
 
 type UmrohCardProps = {
+
+  id: number;
   title: string;
   price: number;
   date: string;
@@ -16,6 +18,7 @@ type UmrohCardProps = {
 };
 
 const UmrohCard: React.FC<UmrohCardProps> = ({
+  id,
   title,
   price,
   date,
@@ -75,7 +78,7 @@ const UmrohCard: React.FC<UmrohCardProps> = ({
 
           {/* Tombol */}
           <a
-            href={link.replace("/umroh/", "/umroh/")}
+            href={`/umroh/${id}`} 
             className="block text-center font-semibold bg-[#418064] hover:bg-[#2b5844] text-white py-2 rounded-full text-sm transition-colors -mx-1"
           >
             Lihat Detail

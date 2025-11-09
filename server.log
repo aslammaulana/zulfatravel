@@ -1,0 +1,68 @@
+   ▲ Next.js 15.5.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.83.36.165:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 18.1s
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 7.8s (717 modules)
+ GET /dashboard 200 in 9938ms
+ ○ Compiling /dashboard/paket ...
+ ✓ Compiled /dashboard/paket in 2.1s (744 modules)
+ GET /dashboard/paket 200 in 2423ms
+ GET /dashboard/paket 200 in 80ms
+ ○ Compiling /api/paket ...
+ ✓ Compiled /api/paket in 713ms (809 modules)
+ GET /api/paket 200 in 3125ms
+ GET /api/paket 200 in 394ms
+ ○ Compiling /dashboard/edit/[id] ...
+ ✓ Compiled /dashboard/edit/[id] in 1012ms (826 modules)
+ GET /dashboard/edit/2 200 in 2992ms
+ GET /api/paket?id=2 200 in 583ms
+ GET /dashboard/paket 200 in 209ms
+ GET /api/paket 200 in 354ms
+ ✓ Compiled /_not-found in 495ms (831 modules)
+ GET /dashboard/paket/2 404 in 945ms
+ GET /dashboard/paket/2 404 in 267ms
+ GET /dashboard/paket 200 in 395ms
+ GET /api/paket 200 in 493ms
+ GET /dashboard 200 in 105ms
+ ○ Compiling /dashboard/add ...
+ ✓ Compiled /dashboard/add in 571ms (838 modules)
+ GET /dashboard/add 200 in 751ms
+ GET /dashboard 200 in 226ms
+ GET /dashboard/add 200 in 103ms
+ GET /dashboard/paket 200 in 119ms
+ GET /api/paket 200 in 841ms
+ GET /api/paket 200 in 417ms
+ ✓ Compiled in 5.3s (312 modules)
+ GET /dashboard/paket 200 in 204ms
+ GET /dashboard/add 200 in 149ms
+ ✓ Compiled in 2.6s (769 modules)
+ GET /dashboard/add 200 in 799ms
+ ✓ Compiled in 1039ms (308 modules)
+ GET /dashboard/add 200 in 318ms
+ ✓ Compiled in 348ms (308 modules)
+ GET /dashboard/add 200 in 187ms
+ ✓ Compiled in 712ms (308 modules)
+ GET /dashboard/add 200 in 81ms
+ ✓ Compiled in 668ms (308 modules)
+ GET /dashboard/add 200 in 553ms
+ ✓ Compiled in 1497ms (308 modules)
+ GET /dashboard/add 200 in 323ms
+ ✓ Compiled in 3.5s (765 modules)
+ GET /dashboard/add 200 in 914ms
+ ✓ Compiled in 9.5s (765 modules)
+ GET /dashboard/add 200 in 415ms
+ ✓ Compiled in 951ms (765 modules)
+ GET /dashboard/add 200 in 339ms
+ ✓ Compiled in 913ms (765 modules)
+ GET /dashboard/add 200 in 207ms
+ ✓ Compiled in 1293ms (765 modules)
+ GET /dashboard/add 200 in 286ms
+ ✓ Compiled in 1008ms (765 modules)
+ GET /dashboard/add 200 in 218ms
+ ✓ Compiled in 677ms (765 modules)
+ GET /dashboard/add 200 in 156ms
+[?25h

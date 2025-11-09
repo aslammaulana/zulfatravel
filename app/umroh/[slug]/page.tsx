@@ -13,11 +13,11 @@ export default async function UmrohDetailPage({
 }) {
   const { slug } = params;
 
-  // Ambil data berdasarkan kolom 'link'
+  // Ambil data berdasarkan kolom 'id'
   const { data, error } = await supabase
     .from("paket_umroh")
     .select("*")
-    .eq("link", `/umroh/${slug}`)
+    .eq("id", slug)
     .single();
 
   if (error || !data) {

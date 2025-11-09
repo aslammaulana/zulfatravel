@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans, Teko } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/context/theme-provider";
 
 const inter = Inter ({
   variable: "--font-noto",
@@ -25,11 +26,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${teko.variable} font-sans antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
