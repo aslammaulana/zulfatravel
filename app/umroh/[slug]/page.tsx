@@ -7,10 +7,10 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export default async function UmrohDetailPage({ params }: { params: { slug: string } }) {
+export default async function UmrohDetailPage({ params }: any) {
   const { slug } = params;
 
-  const id = Number(slug); // jika id di DB number
+  const id = Number(slug);
 
   const { data, error } = await supabase
     .from("paket_umroh")
@@ -19,7 +19,7 @@ export default async function UmrohDetailPage({ params }: { params: { slug: stri
     .single();
 
   if (error || !data) {
-    notFound(); // redirect ke 404
+    notFound();
   }
 
   return (
