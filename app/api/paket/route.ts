@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(data ?? []);
   } catch (error: any) {
     console.error('Unexpected error in GET /api/paket:', error);
     return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, data: data[0] });
+    return NextResponse.json({ success: true, data: data?.[0] });
   } catch (error: any) {
     console.error('Unexpected error in POST /api/paket:', error);
     return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
