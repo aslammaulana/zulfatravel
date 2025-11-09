@@ -1,31 +1,30 @@
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export default async function UmrohDetailPage({
-  params,
-}: {
+type PageProps = {
   params: { slug: string };
-}) {
+};
+
+export default async function UmrohDetailPage({ params }: PageProps) {
   const { slug } = params;
 
-  // Ambil data berdasarkan kolom 'id'
+  // Jika id di DB bertipe number, ubah slug ke number
+  const id = Number(slug);
+
   const { data, error } = await supabase
     .from("paket_umroh")
     .select("*")
-    .eq("id", slug)
+    .eq("id", id)
     .single();
 
   if (error || !data) {
-    return (
-      <div className="text-center py-20">
-        <p className="text-lg font-medium">Paket tidak ditemukan.</p>
-      </div>
-    );
+    notFound(); // redirect ke 404
   }
 
   return (
@@ -67,4 +66,3 @@ export default async function UmrohDetailPage({
     </main>
   );
 }
-    
