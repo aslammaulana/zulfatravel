@@ -10,13 +10,13 @@ export default function UpdatePaketPage() {
   const router = useRouter();
   interface UmrohPackage {
     id?: string;
-    title?: string;
+    title: string;
     price: number;
-    date?: string;
-    duration?: string;
-    airline?: string;
-    imagesrc?: string;
-    link?: string;
+    date: string;
+    duration: string;
+    airline: string;
+    imagesrc: string;
+    link: string;
   }
 
   const [paket, setPaket] = useState<UmrohPackage | null>(null);
@@ -32,7 +32,18 @@ export default function UpdatePaketPage() {
         }
         const data = await response.json();
         if (data.length > 0) {
-          setPaket(data[0]);
+          // Ensure all required fields have values
+          const packageWithDefaults = {
+            id: data[0].id || '',
+            title: data[0].title || '',
+            price: data[0].price || 0,
+            date: data[0].date || '',
+            duration: data[0].duration || '',
+            airline: data[0].airline || '',
+            imagesrc: data[0].imagesrc || '',
+            link: data[0].link || '',
+          };
+          setPaket(packageWithDefaults);
         } else {
           setError('Package not found');
         }
